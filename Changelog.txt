@@ -1,0 +1,20 @@
+Changelog
+Current - V 0.2.0
+=====================================================================
+1.0.0 (XX/XX/2017) (INITIAL RELEASE)
+=====================================================================
+0.2.0 (7/10/2017) (TESTING ONLY)
+- Fixed broken save mechanics
+- Fixed file extension handling
+- Fixed broken file overwrite
+- Fixed missing extension display after return from options or loading existing file
+- Fixed return from load/save to main menu
+- Fixed line variable resets
+- Fixed command buffer addition for options return
+- Fixed broken return if total lines was 0
+- Changed options command from o to -o to
+- Renamed project from Code Compiler to Command Line Word Proccessor
+=====================================================================
+0.1.0 (5/17/2017) (TESTING ONLY)
+- Initial build
+=====================================================================
