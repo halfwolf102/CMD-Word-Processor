@@ -4,9 +4,9 @@
 :-------------------------------------------------------------------------------
 set version=0
 set revision=2
-set minor=0
+set minor=1
 Setlocal EnableDelayedExpansion
-title Word Processor v%version%.%revision%
+title Word Processor v%version%.%revision%.%minor%
 
 :fullreset
 :Pre-Op Variables
@@ -18,7 +18,7 @@ set linetot=0
 set start=
 set lastloc=initial
 cls
-echo Command Line Word Processor v%version%.%revision%
+echo Command Line Word Processor v%version%.%revision%.%minor%
 echo by Ezekiel "Zeek" Kovar
 echo -------------------------------------------------------------------------------
 echo N - Create new file
@@ -53,7 +53,27 @@ for /f "usebackq tokens=*" %%a in ("%loadfile%") do (
 	set "line!linenum!=%%a"
 )
 set linenum=0
-goto return
+set commandbuffer=0
+set curpage=0
+set pagetot=0
+
+:loadbuffer
+set /a "commandbuffer=commandbuffer+225"
+set /a "pagetot=pagetot+1"
+set /a "curpage=curpage+1"
+cls
+echo Enter -O to access options
+echo Filetype: %extension%
+echo Page %curpage% / %pagetot%
+echo -------------------------------------------------------------------------------
+
+:loadloop
+if "%linetot%"=="0" goto normloop
+set /a "linenum=linenum+1"
+echo Line %linenum%: !line%linenum%!
+if "%linenum%"=="%commandbuffer%" echo: & echo -- BUFFER LIMIT REACHED^^! -- & echo ALL PREVIOUS COMMANDS WILL BE CLEARED ON THE NEXT LINE& pause & goto loadbuffer
+if not "%linenum%"=="%linetot%" goto loadloop
+goto normloop
 
 :version
 cls
@@ -80,8 +100,8 @@ cls
 
 :bufferloop
 set /a "commandbuffer=commandbuffer+225"
-:set /a "pagetot=pagetot+1"
-:set /a "curpage=curpage+1"
+set /a "pagetot=pagetot+1"
+set /a "curpage=curpage+1"
 echo Enter -O to access options
 echo Filetype: %extension%
 :echo Page %curpage% / %pagetot%
@@ -115,7 +135,7 @@ echo X - Exit without saving
 set /p option=Select an option: 
 for /f "tokens=1" %%a in ("%option%") do (
 	if /i "%%a"=="E" goto editor
-	if /i "%%a"=="R" goto returnbuffer
+	if /i "%%a"=="R" goto return
 	if /i "%%a"=="s" goto save
 	if /i "%%a"=="D" goto display
 	if /i "%%a"=="Q" goto exitconfirm
@@ -135,18 +155,19 @@ echo ---------------------------------------------------------------------------
 echo OLD Line %editline%: !line%editline%!
 set /p line%editline%=NEW Line %editline%: 
 set editline=
-goto return
-
-:returnbuffer
-set /a "commandbuffer=commandbuffer+225"
 
 :return
 set linenum=0
-cls
+set commandbuffer=0
+set curpage=0
+
+:returnbuffer
+set /a "commandbuffer=commandbuffer+225"
 set /a "curpage=curpage+1"
+cls
 echo Enter -O to access options
 echo Filetype: %extension%
-:echo Page %curpage% / %pagetot%
+echo Page %curpage% / %pagetot%
 echo -------------------------------------------------------------------------------
 
 :returnloop
