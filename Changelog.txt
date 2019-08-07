@@ -1,7 +1,13 @@
 Changelog
-Current - V 0.2.1
+Current - V 1.0.0
 =====================================================================
 1.0.0 (XX/XX/2017) (INITIAL RELEASE)
+=====================================================================
+0.2.1 (10/9/2017) (TESTING ONLY)
+- Fixed option return display buffer
+- Added seperate loop for loading existing files
+- Added page count for display buffer
+- Added minor revision number to full version number
 =====================================================================
 0.2.0 (7/10/2017) (TESTING ONLY)
 - Fixed broken save mechanics
@@ -14,12 +20,6 @@ Current - V 0.2.1
 - Fixed broken return if total lines was 0
 - Changed options command from o to -o to
 - Renamed project from Code Compiler to Command Line Word Proccessor
-=====================================================================
-0.2.1 (10/9/2017) (TESTING ONLY)
-- Fixed option return display buffer
-- Added seperate loop for loading existing files
-- Added page count for display buffer
-- Added minor revision number to full version number
 =====================================================================
 0.1.0 (5/17/2017) (TESTING ONLY)
 - Initial build
